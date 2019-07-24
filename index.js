@@ -53,7 +53,27 @@ app.get('/api/items', cors(), async (req, res) => {
   res.json(items);
 });
 
-app.get('/api/suppliers', cors(), async (req, res) => {
+app.route('/api/suppliers')
+  .get(cors(), async (req, res) => {
+    const suppliers = [
+      {id: 1, name: "supplier 1" },
+      {id: 2, name: "supplier 2" },
+      {id: 3, name: "supplier 3" },
+    ];
+  
+    res.json(suppliers);
+  })
+  .delete(cors(), async (req, res) => {
+    res.json({});
+  })
+  .post(cors(), async (req, res) => {
+    res.json({});
+  })
+  .put(cors(), async (req, res) => {
+    res.json({});
+  });
+
+/*app.get('/api/suppliers', cors(), async (req, res) => {
   const suppliers = [
     {id: 1, name: "supplier 1" },
     {id: 2, name: "supplier 2" },
@@ -61,7 +81,7 @@ app.get('/api/suppliers', cors(), async (req, res) => {
   ];
 
   res.json(suppliers);
-});
+});*/
 
 app.post('/api/send', cors(), async (req, res) => {
   res.json({});
