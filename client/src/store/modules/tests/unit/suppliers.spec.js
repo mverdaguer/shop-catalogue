@@ -2,38 +2,36 @@ import SupplierService from '@/services/suppliers'
 import suppliersStore from '@/store/modules/suppliers';
 import * as types from '@/store/mutation-types'
 
-jest.mock('@/services/suppliers', () => {
-  return {
-    getSuppliers: jest.fn(),
-    createSupplier: jest.fn(),
-    deleteSupplier: jest.fn()
-  };
-});
+jest.mock('@/services/suppliers', () => ({
+  getSuppliers: jest.fn(),
+  createSupplier: jest.fn(),
+  deleteSupplier: jest.fn(),
+}));
 
 describe('suppliers store', () => {
   describe('mutations', () => {
     it(types.FETCH_SUPPLIERS, () => {
       const state = { all: [] };
       const mutation = suppliersStore.mutations[types.FETCH_SUPPLIERS];
-      
-      mutation(state, {suppliers: [1, 2]});
+
+      mutation(state, { suppliers: [1, 2] });
       expect(state.all).toEqual([1, 2]);
     });
 
     it(types.CREATE_SUPPLIER, () => {
       const state = { all: [1] };
       const mutation = suppliersStore.mutations[types.CREATE_SUPPLIER];
-      
-      mutation(state, {supplier: 2});
+
+      mutation(state, { supplier: 2 });
       expect(state.all).toEqual([1, 2]);
     });
 
     it(types.DELETE_SUPPLIER, () => {
-      const state = { all: [{id: 1}, {id: 2}] };
+      const state = { all: [{ id: 1 }, { id: 2 }] };
       const mutation = suppliersStore.mutations[types.DELETE_SUPPLIER];
-      
-      mutation(state, {id: 1});
-      expect(state.all).toEqual([{id: 2}]);
+
+      mutation(state, { id: 1 });
+      expect(state.all).toEqual([{ id: 2 }]);
     });
   });
 
@@ -41,7 +39,7 @@ describe('suppliers store', () => {
     it('fetchSuppliers', async () => {
       const commit = jest.fn();
       const suppliers = [1, 2];
-      SupplierService.getSuppliers.mockResolvedValueOnce({data: suppliers});
+      SupplierService.getSuppliers.mockResolvedValueOnce({ data: suppliers });
 
       suppliersStore.actions.fetchSuppliers({ commit });
       await SupplierService.getSuppliers();
@@ -53,9 +51,9 @@ describe('suppliers store', () => {
     it('createSupplier', async () => {
       const commit = jest.fn();
       SupplierService.createSupplier.mockResolvedValueOnce({});
-      const supplier = {id: 1};
+      const supplier = { id: 1 };
       global.router = {
-        push: jest.fn()
+        push: jest.fn(),
       };
 
       suppliersStore.actions.createSupplier({ commit }, supplier);
@@ -82,9 +80,9 @@ describe('suppliers store', () => {
   describe('getters', () => {
     it('allSuppliers', () => {
       const state = {
-        all: [1, 2, 3]
+        all: [1, 2, 3],
       };
-        
+
       const result = suppliersStore.getters.allSuppliers(state);
       expect(result).toEqual(state.all);
     });

@@ -1,9 +1,9 @@
 const RouterLink = {
   name: 'router-link',
-  render: function (h) {
+  render(h) {
     return h('div', this.$slots.default)
   },
-  props: ['to']
+  props: ['to'],
 };
 
 export default RouterLink;

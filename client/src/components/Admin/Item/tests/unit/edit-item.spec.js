@@ -4,13 +4,11 @@ import ElementUI from 'element-ui';
 import ItemService from '@/services/items';
 import EditItem from '@/components/Admin/Item/EditItem';
 
-jest.mock('@/services/items', () => {
-  return {
-    getItem: jest.fn().mockResolvedValue({data: { id: 1, name: 'item-name', image: '.png' }}),
-    updateItem: jest.fn().mockResolvedValue({}),
-    addItem: jest.fn().mockResolvedValue({})
-  };
-});
+jest.mock('@/services/items', () => ({
+  getItem: jest.fn().mockResolvedValue({ data: { id: 1, name: 'item-name', image: '.png' } }),
+  updateItem: jest.fn().mockResolvedValue({}),
+  addItem: jest.fn().mockResolvedValue({}),
+}));
 
 const categories = [
   { id: 1, name: 'cat1' },
@@ -21,7 +19,7 @@ const categories = [
 
 const suppliers = [
   { id: 1, name: 'sup1' },
-  { id: 2, name: 'sup2' }
+  { id: 2, name: 'sup2' },
 ];
 
 describe('EditItem.vue', () => {
@@ -34,11 +32,11 @@ describe('EditItem.vue', () => {
     mocks = {
       $t: key => key,
       $router: {
-        push: jest.fn()
+        push: jest.fn(),
       },
       $route: {
-        params: {}
-      }
+        params: {},
+      },
     };
 
     localVue = createLocalVue();
@@ -47,11 +45,11 @@ describe('EditItem.vue', () => {
 
     getters = {
       allCategories: jest.fn().mockReturnValue(categories),
-      allSuppliers: jest.fn().mockReturnValue(suppliers)
+      allSuppliers: jest.fn().mockReturnValue(suppliers),
     };
 
     store = new Vuex.Store({
-      getters
+      getters,
     });
   })
 
@@ -82,7 +80,7 @@ describe('EditItem.vue', () => {
       name: 'test',
       category: categories[0],
       image: 'image',
-      id: '1'
+      id: '1',
     };
 
     wrapper.setData({ item });
@@ -112,12 +110,12 @@ describe('EditItem.vue', () => {
 
   it('Should be filled when we edit an item.', (done) => {
     mocks.$route.params.id = 1;
-   
+
     const wrapper = shallowMount(EditItem, { store, localVue, mocks });
     expect(ItemService.getItem).toHaveBeenCalledWith(1);
 
     wrapper.vm.$nextTick(() => {
-      expect(wrapper.vm.item).toEqual({id: 1, name: 'item-name', image: '.png'});
+      expect(wrapper.vm.item).toEqual({ id: 1, name: 'item-name', image: '.png' });
       done();
     });
   });
@@ -128,7 +126,7 @@ describe('EditItem.vue', () => {
     const item = {
       category: '11',
       image: '.png',
-      name: 'test'
+      name: 'test',
     };
 
     wrapper.setData({ item })
@@ -149,7 +147,7 @@ describe('EditItem.vue', () => {
     const item = {
       category: '11',
       image: '.png',
-      name: 'test'
+      name: 'test',
     };
 
     wrapper.setData({ item })
@@ -165,7 +163,7 @@ describe('EditItem.vue', () => {
   it('Should autoselect category if it is passed via params.', () => {
     mocks.$route.params.category = 11;
     const wrapper = shallowMount(EditItem, { store, localVue, mocks });
-    
+
     expect(wrapper.vm.item.category).toBe(11);
   });
 });

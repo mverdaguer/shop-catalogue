@@ -101,10 +101,10 @@ export default {
       this.setCurrentCategory(undefined)
       this.$router.push({ name: 'MainPage' })
     },
-    
+
     ...mapActions([
       'setCurrentCategory',
-    ])
+    ]),
   },
 }
 </script>

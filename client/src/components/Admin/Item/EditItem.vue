@@ -54,7 +54,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import ItemService from '@/services/items'
-import ImagePicker from '@/components/Utils/ImagePicker.vue'
+import ImagePicker from '@/components/Utils/ImagePicker'
 
 export default {
   components: {
@@ -75,7 +75,7 @@ export default {
       }
       return ''
     },
-    
+
     isDisabled() {
       return !this.item.name || !this.item.category || !this.item.image
     },

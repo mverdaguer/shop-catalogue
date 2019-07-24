@@ -8,18 +8,18 @@ import RouterLink from '@/test/utils/router-link.mock';
 const router = new VueRouter();
 
 const mocks = {
-  $t: key => key
+  $t: key => key,
 };
 
 const mocksRouter = {
   $t: key => key,
   $router: {
-    push: jest.fn()
-  }
+    push: jest.fn(),
+  },
 };
 
 const stubs = {
-  RouterLink
+  RouterLink,
 };
 
 describe('DisplayCategory.vue', () => {
@@ -34,37 +34,41 @@ describe('DisplayCategory.vue', () => {
     localVue.use(ElementUI);
 
     getters = {
-      allCategories: jest.fn().mockReturnValue([])
+      allCategories: jest.fn().mockReturnValue([]),
     };
 
     actions = {
       deleteCategories: jest.fn(),
-      fetchCategories: jest.fn()
+      fetchCategories: jest.fn(),
     };
 
     store = new Vuex.Store({
       actions,
-      getters
+      getters,
     })
   })
 
   it('should contain links to items, suppliers and home images admin zones.', () => {
     localVue.use(VueRouter);
-    const wrapper = shallowMount(DisplayCategory, { store, localVue, router, mocks, stubs });
+    const wrapper = shallowMount(DisplayCategory, {
+      store, localVue, router, mocks, stubs,
+    });
 
     const links = wrapper.findAll(RouterLink);
     expect(links.length).toBe(3);
     expect(links.at(0).props().to).toBeDefined();
-    expect(links.at(0).props().to).toBe("/admin");
+    expect(links.at(0).props().to).toBe('/admin');
     expect(links.at(1).props().to).toBeDefined();
-    expect(links.at(1).props().to).toBe("/admin_suppliers");
+    expect(links.at(1).props().to).toBe('/admin_suppliers');
     expect(links.at(2).props().to).toBeDefined();
-    expect(links.at(2).props().to).toBe("/admin_home_images");
+    expect(links.at(2).props().to).toBe('/admin_home_images');
   });
 
   it('should contain a button to create a category.', () => {
     localVue.use(VueRouter);
-    const wrapper = shallowMount(DisplayCategory, { store, localVue, router, mocks });
+    const wrapper = shallowMount(DisplayCategory, {
+      store, localVue, router, mocks,
+    });
 
     const buttons = wrapper.findAll(ElementUI.Button);
     expect(buttons.length).toBe(3);
@@ -73,7 +77,9 @@ describe('DisplayCategory.vue', () => {
 
   it('should contain a table containing each category (empty).', () => {
     localVue.use(VueRouter);
-    const wrapper = shallowMount(DisplayCategory, { store, localVue, router, mocks });
+    const wrapper = shallowMount(DisplayCategory, {
+      store, localVue, router, mocks,
+    });
 
     const table = wrapper.find(ElementUI.Table);
     expect(table.props().data).toEqual([]);
@@ -88,11 +94,13 @@ describe('DisplayCategory.vue', () => {
     localVue.use(VueRouter);
     const categories = [
       { id: '1', name: 'cat1' },
-      { id: '2', name: 'cat2' }
+      { id: '2', name: 'cat2' },
     ];
-    
+
     getters.allCategories.mockReturnValue(categories);
-    const wrapper = shallowMount(DisplayCategory, { store, localVue, router, mocks });
+    const wrapper = shallowMount(DisplayCategory, {
+      store, localVue, router, mocks,
+    });
 
     const table = wrapper.find(ElementUI.Table);
     expect(table.props().data).toEqual(categories);
@@ -104,7 +112,9 @@ describe('DisplayCategory.vue', () => {
   });
 
   it('should navigate to CreateCategory.', () => {
-    const wrapper = shallowMount(DisplayCategory, { store, localVue, mocks: mocksRouter, stubs });
+    const wrapper = shallowMount(DisplayCategory, {
+      store, localVue, mocks: mocksRouter, stubs,
+    });
 
     expect(mocksRouter.$router.push).not.toBeCalled();
     wrapper.vm.createCategory();
@@ -112,7 +122,9 @@ describe('DisplayCategory.vue', () => {
   });
 
   it('should navigate to EditCategory.', () => {
-    const wrapper = shallowMount(DisplayCategory, { store, localVue, mocks: mocksRouter, stubs });
+    const wrapper = shallowMount(DisplayCategory, {
+      store, localVue, mocks: mocksRouter, stubs,
+    });
 
     expect(mocksRouter.$router.push).not.toBeCalled();
     wrapper.vm.handleEdit(1);

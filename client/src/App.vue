@@ -26,9 +26,9 @@
 </style>
 
 <script>
-import Desktop from './components/Menu/Desktop.vue'
-import Mobile from './components/Menu/Mobile.vue'
-import Sidebar from './components/Menu/Sidebar.vue'
+import Desktop from './components/Menu/Desktop'
+import Mobile from './components/Menu/Mobile'
+import Sidebar from './components/Menu/Sidebar'
 
 export default {
   components: {
@@ -45,7 +45,7 @@ export default {
 
   created() {
     this.$store.dispatch('fetchCategories')
-    document.title =  this.$t('main.brand_name')
+    document.title = this.$t('main.brand_name')
   },
 
   methods: {

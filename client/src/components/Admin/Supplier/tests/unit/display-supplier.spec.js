@@ -8,18 +8,18 @@ import RouterLink from '@/test/utils/router-link.mock';
 const router = new VueRouter();
 
 const mocks = {
-  $t: key => key
+  $t: key => key,
 };
 
 const mocksRouter = {
   $t: key => key,
   $router: {
-    push: jest.fn()
-  }
+    push: jest.fn(),
+  },
 };
 
 const stubs = {
-  RouterLink
+  RouterLink,
 };
 
 describe('DisplaySupplier.vue', () => {
@@ -34,37 +34,41 @@ describe('DisplaySupplier.vue', () => {
     localVue.use(ElementUI);
 
     getters = {
-      allSuppliers: jest.fn().mockReturnValue([])
+      allSuppliers: jest.fn().mockReturnValue([]),
     };
 
     actions = {
       deleteSupplier: jest.fn(),
-      fetchSuppliers: jest.fn()
+      fetchSuppliers: jest.fn(),
     };
 
     store = new Vuex.Store({
       actions,
-      getters
+      getters,
     })
   })
 
   it('should contain links to items, categories and home images admin zones.', () => {
     localVue.use(VueRouter);
-    const wrapper = shallowMount(DisplaySupplier, { store, localVue, router, mocks, stubs });
+    const wrapper = shallowMount(DisplaySupplier, {
+      store, localVue, router, mocks, stubs,
+    });
 
     const links = wrapper.findAll(RouterLink);
     expect(links.length).toBe(3);
     expect(links.at(0).props().to).toBeDefined();
-    expect(links.at(0).props().to).toBe("/admin");
+    expect(links.at(0).props().to).toBe('/admin');
     expect(links.at(1).props().to).toBeDefined();
-    expect(links.at(1).props().to).toBe("/admin_categories");
+    expect(links.at(1).props().to).toBe('/admin_categories');
     expect(links.at(2).props().to).toBeDefined();
-    expect(links.at(2).props().to).toBe("/admin_home_images");
+    expect(links.at(2).props().to).toBe('/admin_home_images');
   });
 
   it('should contain a button to create a supplier.', () => {
     localVue.use(VueRouter);
-    const wrapper = shallowMount(DisplaySupplier, { store, localVue, router, mocks });
+    const wrapper = shallowMount(DisplaySupplier, {
+      store, localVue, router, mocks,
+    });
 
     const buttons = wrapper.findAll(ElementUI.Button);
     expect(buttons.length).toBe(3);
@@ -73,7 +77,9 @@ describe('DisplaySupplier.vue', () => {
 
   it('should contain a table containing each supplier (empty).', () => {
     localVue.use(VueRouter);
-    const wrapper = shallowMount(DisplaySupplier, { store, localVue, router, mocks });
+    const wrapper = shallowMount(DisplaySupplier, {
+      store, localVue, router, mocks,
+    });
 
     const table = wrapper.find(ElementUI.Table);
     expect(table.props().data).toEqual([]);
@@ -87,11 +93,13 @@ describe('DisplaySupplier.vue', () => {
     localVue.use(VueRouter);
     const suppliers = [
       { id: '1', name: 'sup1' },
-      { id: '2', name: 'sup2' }
+      { id: '2', name: 'sup2' },
     ];
-    
+
     getters.allSuppliers.mockReturnValue(suppliers);
-    const wrapper = shallowMount(DisplaySupplier, { store, localVue, router, mocks });
+    const wrapper = shallowMount(DisplaySupplier, {
+      store, localVue, router, mocks,
+    });
 
     const table = wrapper.find(ElementUI.Table);
     expect(table.props().data).toEqual(suppliers);
@@ -102,7 +110,9 @@ describe('DisplaySupplier.vue', () => {
   });
 
   it('should navigate to CreateSupplier.', () => {
-    const wrapper = shallowMount(DisplaySupplier, { store, localVue, mocks: mocksRouter, stubs });
+    const wrapper = shallowMount(DisplaySupplier, {
+      store, localVue, mocks: mocksRouter, stubs,
+    });
 
     expect(mocksRouter.$router.push).not.toBeCalled();
     wrapper.vm.createSupplier();
@@ -110,7 +120,9 @@ describe('DisplaySupplier.vue', () => {
   });
 
   it('should navigate to EditSupplier.', () => {
-    const wrapper = shallowMount(DisplaySupplier, { store, localVue, mocks: mocksRouter, stubs });
+    const wrapper = shallowMount(DisplaySupplier, {
+      store, localVue, mocks: mocksRouter, stubs,
+    });
 
     expect(mocksRouter.$router.push).not.toBeCalled();
     wrapper.vm.handleEdit(1);

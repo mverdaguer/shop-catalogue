@@ -1,31 +1,28 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ContactService from '@/services/contact';
-import Contact from '@/components/Contact';
 import ElementUI from 'element-ui';
+import Contact from '@/components/Contact';
 
 const localVue = createLocalVue();
 localVue.directive('popover', {});
 localVue.use(ElementUI);
 
-jest.mock('@/services/contact', () => {
-  return {
-    sendMail: jest.fn()
-  };
-});
+jest.mock('@/services/contact', () => ({
+  sendMail: jest.fn(),
+}));
 
 const mocks = {
-  $t: key => key
+  $t: key => key,
 };
 
 const stubs = {
   'gmap-map': true,
-  'gmap-marker': true
+  'gmap-marker': true,
 };
 
 describe('Contact.vue', () => {
   it('Contains a form to send a message to the owner.', () => {
     const wrapper = shallowMount(Contact, { localVue, mocks, stubs });
-    
+
     const h1 = wrapper.find('h1');
     expect(h1.text()).toBe('main.contact');
 
@@ -40,7 +37,7 @@ describe('Contact.vue', () => {
 
   it('The button to send message is disabled if name, mail or content are empty.', () => {
     const wrapper = shallowMount(Contact, { localVue, mocks, stubs });
-    
+
     const button = wrapper.find(ElementUI.Button);
     expect(button.props().disabled).toBeTruthy();
 
@@ -49,38 +46,38 @@ describe('Contact.vue', () => {
       message: {
         name: undefined,
         mail: 'aa@gmail.com',
-        content: 'content'
-      }
+        content: 'content',
+      },
     });
     expect(button.props().disabled).toBeTruthy();
-    
+
     // All but mail.
     wrapper.setData({
       message: {
         name: 'name',
         mail: undefined,
-        content: 'content'
-      }
+        content: 'content',
+      },
     });
     expect(button.props().disabled).toBeTruthy();
-    
+
     // All but content.
     wrapper.setData({
       message: {
         name: 'name',
         mail: 'aa@gmail.com',
-        content: undefined
-      }
+        content: undefined,
+      },
     });
     expect(button.props().disabled).toBeTruthy();
-    
+
     // All.
     wrapper.setData({
       message: {
         name: 'name',
         mail: 'aa@gmail.com',
-        content: 'content'
-      }
+        content: 'content',
+      },
     });
     expect(button.props().disabled).toBeFalsy();
   });

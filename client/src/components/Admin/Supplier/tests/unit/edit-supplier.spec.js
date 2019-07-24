@@ -4,12 +4,10 @@ import ElementUI from 'element-ui';
 import SupplierService from '@/services/suppliers';
 import EditSupplier from '@/components/Admin/Supplier/EditSupplier';
 
-jest.mock('@/services/suppliers', () => {
-  return {
-    getSupplier: jest.fn().mockResolvedValue({data: {}}),
-    updateSupplier: jest.fn().mockResolvedValue({})
-  };
-});
+jest.mock('@/services/suppliers', () => ({
+  getSupplier: jest.fn().mockResolvedValue({ data: {} }),
+  updateSupplier: jest.fn().mockResolvedValue({}),
+}));
 
 const suppliers = [
   { id: 1, name: 'sup1' },
@@ -27,11 +25,11 @@ describe('EditSupplier.vue', () => {
     mocks = {
       $t: key => key,
       $router: {
-        push: jest.fn()
+        push: jest.fn(),
       },
       $route: {
-        params: {}
-      }
+        params: {},
+      },
     };
 
     localVue = createLocalVue();
@@ -39,16 +37,16 @@ describe('EditSupplier.vue', () => {
     localVue.use(ElementUI);
 
     getters = {
-      allSuppliers: jest.fn().mockReturnValue([])
+      allSuppliers: jest.fn().mockReturnValue([]),
     };
 
     actions = {
-      createSupplier: jest.fn()
+      createSupplier: jest.fn(),
     };
 
     store = new Vuex.Store({
       actions,
-      getters
+      getters,
     })
   })
 
@@ -56,7 +54,7 @@ describe('EditSupplier.vue', () => {
     const wrapper = shallowMount(EditSupplier, { store, localVue, mocks });
 
     const h1 = wrapper.find('h1');
-    expect(h1.text()).toBe("main.create_supplier");
+    expect(h1.text()).toBe('main.create_supplier');
 
     const input = wrapper.find(ElementUI.Input);
     expect(input.props().value).toBeUndefined();
@@ -78,7 +76,7 @@ describe('EditSupplier.vue', () => {
     expect(buttons.length).toBe(2);
     expect(buttons.at(0).attributes().disabled).toBe('true');
 
-    wrapper.setData({ supplier: { name: "test" } });
+    wrapper.setData({ supplier: { name: 'test' } });
     expect(buttons.at(0).attributes().disabled).toBeUndefined();
   });
 
@@ -91,7 +89,7 @@ describe('EditSupplier.vue', () => {
     const wrapper = shallowMount(EditSupplier, { store, localVue, mocks });
 
     const h1 = wrapper.find('h1');
-    expect(h1.text()).toBe("main.update_supplier");
+    expect(h1.text()).toBe('main.update_supplier');
     expect(SupplierService.getSupplier).toHaveBeenCalledWith(1);
 
     wrapper.vm.$nextTick(() => {
@@ -101,7 +99,7 @@ describe('EditSupplier.vue', () => {
       const buttons = wrapper.findAll(ElementUI.Button);
       expect(buttons.at(0).attributes().disabled).toBeUndefined();
       expect(buttons.at(0).text()).toBe('main.update');
-      
+
       done();
     });
   });
@@ -109,7 +107,7 @@ describe('EditSupplier.vue', () => {
   it('Should call the method to create supplier, when creating, with proper params.', () => {
     const wrapper = shallowMount(EditSupplier, { store, localVue, mocks });
 
-    const supplier = { name: "test" }
+    const supplier = { name: 'test' }
     wrapper.setData({ supplier })
     wrapper.vm.updateSupplier();
     expect(actions.createSupplier).toHaveBeenCalled();
@@ -120,7 +118,7 @@ describe('EditSupplier.vue', () => {
     mocks.$route.params.id = 1;
     const wrapper = shallowMount(EditSupplier, { store, localVue, mocks });
 
-    const supplier = { name: "test" }
+    const supplier = { name: 'test' }
     wrapper.setData({ supplier })
     wrapper.vm.updateSupplier();
     expect(SupplierService.updateSupplier).toHaveBeenCalledWith(supplier);

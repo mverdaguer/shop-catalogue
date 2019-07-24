@@ -37,7 +37,7 @@ function initLocalization(Vue) {
 
   const messages = {
     en: enLocale,
-    'ca-ES': caLocale
+    'ca-ES': caLocale,
   }
 
   return new VueI18n({

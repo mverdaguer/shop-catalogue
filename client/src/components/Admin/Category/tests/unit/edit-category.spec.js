@@ -4,12 +4,10 @@ import ElementUI from 'element-ui';
 import CategoryService from '@/services/categories';
 import EditCategory from '@/components/Admin/Category/EditCategory';
 
-jest.mock('@/services/categories', () => {
-  return {
-    getCategory: jest.fn().mockResolvedValue({data: {}}),
-    updateCategory: jest.fn().mockResolvedValue({})
-  };
-});
+jest.mock('@/services/categories', () => ({
+  getCategory: jest.fn().mockResolvedValue({ data: {} }),
+  updateCategory: jest.fn().mockResolvedValue({}),
+}));
 
 const categories = [
   { id: 1, name: 'cat1' },
@@ -29,11 +27,11 @@ describe('EditCategory.vue', () => {
     mocks = {
       $t: key => key,
       $router: {
-        push: jest.fn()
+        push: jest.fn(),
       },
       $route: {
-        params: {}
-      }
+        params: {},
+      },
     };
 
     localVue = createLocalVue();
@@ -41,16 +39,16 @@ describe('EditCategory.vue', () => {
     localVue.use(ElementUI);
 
     getters = {
-      allCategories: jest.fn().mockReturnValue([])
+      allCategories: jest.fn().mockReturnValue([]),
     };
 
     actions = {
-      createCategory: jest.fn()
+      createCategory: jest.fn(),
     };
 
     store = new Vuex.Store({
       actions,
-      getters
+      getters,
     })
   })
 
@@ -58,7 +56,7 @@ describe('EditCategory.vue', () => {
     const wrapper = shallowMount(EditCategory, { store, localVue, mocks });
 
     const h1 = wrapper.find('h1');
-    expect(h1.text()).toBe("main.create_category");
+    expect(h1.text()).toBe('main.create_category');
 
     const input = wrapper.find(ElementUI.Input);
     expect(input.props().value).toBeUndefined();
@@ -84,7 +82,7 @@ describe('EditCategory.vue', () => {
     expect(buttons.length).toBe(2);
     expect(buttons.at(0).attributes().disabled).toBe('true');
 
-    wrapper.setData({ category: { name: "test" } });
+    wrapper.setData({ category: { name: 'test' } });
     expect(buttons.at(0).attributes().disabled).toBeUndefined();
   });
 
@@ -114,7 +112,7 @@ describe('EditCategory.vue', () => {
     const wrapper = shallowMount(EditCategory, { store, localVue, mocks });
 
     const h1 = wrapper.find('h1');
-    expect(h1.text()).toBe("main.update_category");
+    expect(h1.text()).toBe('main.update_category');
     expect(CategoryService.getCategory).toHaveBeenCalledWith(11);
 
     wrapper.vm.$nextTick(() => {
@@ -131,7 +129,7 @@ describe('EditCategory.vue', () => {
       const buttons = wrapper.findAll(ElementUI.Button);
       expect(buttons.at(0).attributes().disabled).toBeUndefined();
       expect(buttons.at(0).text()).toBe('main.update');
-      
+
       done();
     });
   });
@@ -139,7 +137,7 @@ describe('EditCategory.vue', () => {
   it('Should call the method to create category, when creating, with proper params.', () => {
     const wrapper = shallowMount(EditCategory, { store, localVue, mocks });
 
-    const category = { name: "test" }
+    const category = { name: 'test' }
     wrapper.setData({ category })
     wrapper.vm.updateCategory();
     expect(actions.createCategory).toHaveBeenCalled();
@@ -150,7 +148,7 @@ describe('EditCategory.vue', () => {
     mocks.$route.params.id = 11;
     const wrapper = shallowMount(EditCategory, { store, localVue, mocks });
 
-    const category = { name: "test" }
+    const category = { name: 'test' }
     wrapper.setData({ category })
     wrapper.vm.updateCategory();
     expect(CategoryService.updateCategory).toHaveBeenCalledWith(category);

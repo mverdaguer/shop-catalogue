@@ -5,22 +5,20 @@ import HomeService from '@/services/home';
 import HomeImages from '@/components/Admin/HomeImages';
 import RouterLink from '@/test/utils/router-link.mock';
 
-jest.mock('@/services/home', () => {
-  return {
-    getImages: jest.fn().mockResolvedValue([]),
-    deleteImage: jest.fn().mockResolvedValue({}),
-    addImage: jest.fn().mockResolvedValue({})
-  };
-});
+jest.mock('@/services/home', () => ({
+  getImages: jest.fn().mockResolvedValue([]),
+  deleteImage: jest.fn().mockResolvedValue({}),
+  addImage: jest.fn().mockResolvedValue({}),
+}));
 
 const router = new VueRouter();
 
 const mocks = {
-  $t: key => key
+  $t: key => key,
 };
 
 const stubs = {
-  RouterLink
+  RouterLink,
 };
 
 describe('HomeImages.vue', () => {
@@ -33,16 +31,18 @@ describe('HomeImages.vue', () => {
   })
 
   it('should contain links to items, suppliers and categories admin zones.', () => {
-    const wrapper = shallowMount(HomeImages, { localVue, router, mocks, stubs });
+    const wrapper = shallowMount(HomeImages, {
+      localVue, router, mocks, stubs,
+    });
 
     const links = wrapper.findAll(RouterLink);
     expect(links.length).toBe(3);
     expect(links.at(0).props().to).toBeDefined();
-    expect(links.at(0).props().to).toBe("/admin");
+    expect(links.at(0).props().to).toBe('/admin');
     expect(links.at(1).props().to).toBeDefined();
-    expect(links.at(1).props().to).toBe("/admin_suppliers");
+    expect(links.at(1).props().to).toBe('/admin_suppliers');
     expect(links.at(2).props().to).toBeDefined();
-    expect(links.at(2).props().to).toBe("/admin_categories");
+    expect(links.at(2).props().to).toBe('/admin_categories');
   });
 
   it('should contain a button to add an image.', () => {
@@ -65,19 +65,19 @@ describe('HomeImages.vue', () => {
   });
 
   it('should contain a table containing each home image (filled).', () => {
-    const homeImages = [ "img1", "img2" ];
-    
+    const homeImages = ['img1', 'img2'];
+
     const wrapper = shallowMount(HomeImages, { localVue, router, mocks });
-    wrapper.setData({images: homeImages});
-    
+    wrapper.setData({ images: homeImages });
+
     const table = wrapper.find(ElementUI.Table);
     expect(table.props().data).toEqual(homeImages);
   });
 
-  describe('deleteImage', () => { 
+  describe('deleteImage', () => {
     it('should do nothing if removing image is not defined.', () => {
       const wrapper = shallowMount(HomeImages, { localVue, mocks });
-    
+
       wrapper.vm.deleteImage();
       expect(HomeService.deleteImage).not.toHaveBeenCalled();
     });
@@ -85,18 +85,18 @@ describe('HomeImages.vue', () => {
     it('should remove the selected image.', () => {
       const wrapper = shallowMount(HomeImages, { localVue, mocks });
       wrapper.setData({
-        removingImage: "img1",
-        images: [ "img1", "img2" ]
+        removingImage: 'img1',
+        images: ['img1', 'img2'],
       });
-    
+
       wrapper.vm.deleteImage();
-      expect(HomeService.deleteImage).toHaveBeenCalledWith("img1");
+      expect(HomeService.deleteImage).toHaveBeenCalledWith('img1');
     });
   });
 
   it('createImage - should call the service to create an image.', () => {
     const wrapper = shallowMount(HomeImages, { localVue, mocks });
-  
+
     wrapper.vm.createImage();
     expect(HomeService.addImage).toHaveBeenCalled();
   });

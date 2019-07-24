@@ -1,21 +1,19 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import HomeService from '@/services/home';
-import MainPage from '@/components/MainPage';
 import Vuex from 'vuex';
 import ElementUI from 'element-ui';
+import HomeService from '@/services/home';
+import MainPage from '@/components/MainPage';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(ElementUI);
 
-jest.mock('@/services/home', () => {
-  return {
-    getImages: jest.fn().mockResolvedValue([])
-  };
-});
+jest.mock('@/services/home', () => ({
+  getImages: jest.fn().mockResolvedValue([]),
+}));
 
 const mocks = {
-  $t: key => key
+  $t: key => key,
 };
 
 describe('MainPage.vue', () => {
@@ -25,19 +23,19 @@ describe('MainPage.vue', () => {
 
   beforeEach(() => {
     getters = {
-      allCategories: jest.fn()
+      allCategories: jest.fn(),
     };
 
     actions = {
-      setCurrentCategory: jest.fn()
+      setCurrentCategory: jest.fn(),
     };
 
     store = new Vuex.Store({
       actions,
-      getters
+      getters,
     })
   });
-  
+
   it('Should contain proper texts.', () => {
     const wrapper = shallowMount(MainPage, { store, localVue, mocks });
 
@@ -52,7 +50,7 @@ describe('MainPage.vue', () => {
   });
 
   it('Should contain proper carousel items.', (done) => {
-    HomeService.getImages.mockResolvedValue({data: ['img1', 'img2'] });
+    HomeService.getImages.mockResolvedValue({ data: ['img1', 'img2'] });
     const wrapper = shallowMount(MainPage, { store, localVue, mocks });
 
     wrapper.vm.$nextTick(() => {

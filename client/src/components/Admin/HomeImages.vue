@@ -70,7 +70,7 @@
 </style>
 <script>
 import HomeService from '@/services/home'
-import ImagePicker from '@/components/Utils/ImagePicker.vue'
+import ImagePicker from '@/components/Utils/ImagePicker'
 
 export default {
   components: {

@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    jest: true,
   },
   extends: [
     'plugin:vue/essential',
@@ -33,6 +34,14 @@ module.exports = {
         ],
       },
     ],
+    'import/extensions': ['error', 'always', {
+      js: 'never',
+      mjs: 'never',
+      jsx: 'never',
+      ts: 'never',
+      tsx: 'never',
+      vue: 'never',
+    }],
   },
   globals: {
     router: true,
@@ -40,5 +49,5 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
   },
-
+  plugins: ['jest'],
 };

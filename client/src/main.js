@@ -12,7 +12,7 @@ import {
   initGoogleMaps, initLazyLoad, initLocalization, initAuthentification, initAnalytics,
 } from './main-dependencies/main-dependencies'
 
-import App from './App.vue'
+import App from './App'
 import store from './store/index'
 
 Vue.use(VueRouter)
