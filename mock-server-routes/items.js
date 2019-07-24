@@ -23,6 +23,11 @@ const items = [
   { id: 18, name: "asparagus", image: ".jpg", category: { id: 2 }, supplier: {} },
 ];
 
+router.get('/api/items/:id/edit', cors(), async (req, res) => {
+  const item = items.find(i => i.id == req.params.id) || {};
+  res.json(item);
+});
+
 router.route('/api/items/:id')
   .patch(cors(), async (req, res) => {
     res.json({});

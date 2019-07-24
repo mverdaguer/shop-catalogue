@@ -9,7 +9,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'client/dist')));
 app.use(express.static(path.join(__dirname, 'client/public_images')));
 
-// Routes
+// Routes.
 app.use(require('./mock-server-routes/categories'));
 app.use(require('./mock-server-routes/home'));
 app.use(require('./mock-server-routes/items'));

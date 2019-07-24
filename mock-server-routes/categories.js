@@ -11,6 +11,11 @@ const categories = [
   { id: 8, name: "beans", parent_category: 7 }
 ];
 
+router.get('/api/categories/:id/edit', cors(), async (req, res) => {
+  const category = categories.find(cat => cat.id == req.params.id) || {};
+  res.json(category);
+});
+
 router.route('/api/categories/:id')
   .patch(cors(), async (req, res) => {
     res.json({});
