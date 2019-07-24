@@ -91,17 +91,19 @@ app.get('/api/suppliers/:id/edit', cors(), async (req, res) => {
   res.json(supplier);
 });
 
-app.route('/api/suppliers')
-  .get(cors(), async (req, res) => {
-    res.json(suppliers);
-  })
-  .delete(cors(), async (req, res) => {
+app.route('/api/suppliers/:id')
+  .patch(cors(), async (req, res) => {
     res.json({});
   })
   .post(cors(), async (req, res) => {
     res.json({});
+  });
+
+app.route('/api/suppliers')
+  .get(cors(), async (req, res) => {
+    res.json(suppliers);
   })
-  .put(cors(), async (req, res) => {
+  .post(cors(), async (req, res) => {
     res.json({});
   });
 
