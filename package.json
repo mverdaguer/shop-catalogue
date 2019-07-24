@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Create-react-app with Express",
   "main": "index.js",
-  "cacheDirectories": ["client/node_modules", "node_modules"],
+  "cacheDirectories": [
+    "client/node_modules",
+    "node_modules"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
