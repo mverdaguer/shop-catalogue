@@ -40,7 +40,7 @@
 					</el-option>
 				</el-select>
 			</el-col>
-			<el-col :span="4">
+			<el-col :span="4" align="right">
 				<el-button size="small"
 										type="primary"
 										v-on:click="createItem"

@@ -6,7 +6,7 @@
 		<router-link class="admin-link" to="/admin_home_images">{{ $t('main.home_images') }}</router-link>
 
 		<el-row type="flex" :gutter="10" justify="end">
-			<el-col :span="4">
+			<el-col :span="4" align="right">
 				<el-button size="small"
 										type="primary"
 										v-on:click="createSupplier"

@@ -6,7 +6,7 @@
 		<router-link class="admin-link" to="/admin_categories">{{ $t('main.categories') }}</router-link>
 
 		<el-row type="flex" :gutter="10" justify="end">
-			<el-col :span="4">
+			<el-col :span="4" align="right">
 				<el-button size="small"
 										type="primary"
 										@click="dialogFormVisible = true"
