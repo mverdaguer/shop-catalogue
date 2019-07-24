@@ -1,0 +1,84 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// Variables
+@import "variables";
+// Styles
+// Menu
+@import "./menu/menu-mobile";
+@import "./menu/menu-desktop";
+@import "./menu/sidebar";
+@import "./items-list";
+@import "./main-page";
+@import "./contact";
+@import "./login-register";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+body {
+	background-color: white;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+
+	.main {
+		height: 100%;
+		width: 100%;
+
+		&__page {
+			padding: {
+				left: 10px;
+				right: 10px;
+			}
+			height: calc(100% - 60px);
+			max-height: 100%;
+			overflow-y: auto;
+      overflow-x: hidden;
+      
+      @media (max-width: 900px) {
+        height: 100%;
+      }
+		}
+
+		.el-select {
+			width: 100%;
+		}
+
+		@media screen and (max-width: 900px) {
+			height: -webkit-calc(100% - 40px);
+			height:    -moz-calc(100% - 40px);
+			height:         calc(100% - 40px);
+    }
+    
+    a.admin-link {
+      margin-right: 10px;
+    }
+	}
+
+	@-webkit-keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.item-image[lazy=loaded] {
+		-webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+	}
+}

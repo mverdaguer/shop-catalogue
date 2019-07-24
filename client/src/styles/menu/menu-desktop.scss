@@ -1,0 +1,114 @@
+.desktop-header {
+  position: relative;
+  width: 100%;
+  height: 60px;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	&__item {
+		position: relative;
+		padding: 10px;
+		text-transform: capitalize;
+
+		&--current {
+			> a {
+				border-bottom: 3px solid $menu-selected;
+			}
+		}
+
+		.arrow {
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: -1px;
+			margin-left: 5px;
+			width: 0;
+			height: 0;
+			border-left: 4px solid transparent;
+			border-right: 4px solid transparent;
+			border-top: 5px solid #ccc;
+		}
+
+		a {
+			color: $menu-link-font-color;
+
+			&:link, &:visited, &:hover, &:active {
+				text-decoration: none;
+			}
+		}
+
+		ul {
+			list-style-type: none;
+			z-index: 1;
+		}
+
+		li {
+			&.current {
+				& > a {
+					font-weight: bold;
+				}
+			}
+
+			a {
+				&:visited, &:hover, &:active {
+					color: $menu-link-font-color;
+					font-weight: bold;
+				}
+			}
+		}
+
+		& > a {
+			&:hover {
+				border-bottom: 3px solid $menu-selected;
+			}
+		}
+
+		& > ul {
+			box-sizing: border-box;
+			max-height: calc(100vh - 61px);
+			overflow-y: auto;
+			position: absolute;
+			top: 34px;
+			right: 15px;
+			width: 170px;
+			background-color: #fff;
+			padding: 15px;
+			border: 1px solid #ddd;
+			border-bottom-color: #ccc;
+			text-align: left;
+			border-radius: 3px;
+			white-space: nowrap;
+
+			& > li:not(:last-child) {
+				margin-bottom: 5px;
+			}
+
+			ul {
+				padding-left: 15px;
+
+				li {
+					font-size: 12px;
+					margin-top: 3px;
+				}
+			}
+		}
+  }
+  
+  &__logo {
+    height: 100%;
+    width: 150px;
+    margin-right: auto;
+    margin-left: 10px;
+
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .desktop-header {
+    display: none;
+  }
+}

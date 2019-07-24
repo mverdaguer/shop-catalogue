@@ -1,0 +1,70 @@
+.contact-page {
+
+	&__container {
+		display: flex;
+
+		&__form{
+			min-width: 450px;
+			padding-right: 20px;
+
+			@media screen and (max-width: 600px) {
+				min-width: initial;
+				width: 100%;
+				padding-right: 0;
+			}
+
+			@media screen and (min-width: 600px) and (max-width: 900px) {
+				min-width: 350px;
+			}
+		}
+
+		&__info {
+			.vue-map-container {
+				width: 500px; 
+				height: 300px;
+			}
+
+			@media screen and (max-width: 900px) {
+				flex-grow: 2;
+
+				.vue-map-container {
+					width: initial;
+				}
+			}
+		}
+
+		.vue-map-container {
+			margin-top: 55px;
+		}
+
+		.contact {
+			margin-top: 45px;
+
+			i {
+				margin-right: 5px;
+			}
+		}
+
+		@media screen and (max-width: 600px) {
+			flex-direction: column;
+
+			.contact {
+				margin-top: 20px;
+			}
+		}
+	}
+}
+
+.el-popover {
+	p > span {
+		float: right;
+	}
+
+	.no-margin {
+		margin: 0;
+	}
+
+	.right-aligned {
+		text-align: right;
+	}
+}
