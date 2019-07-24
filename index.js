@@ -70,7 +70,7 @@ app.post('/api/send', cors(), async (req, res) => {
 
 // Anything that doesn't match the above, send back the index.html file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/dist/index.html'))
+  res.sendFile(path.join(__dirname + '/client/dist'))
 })
 
 // Choose the port and start the server

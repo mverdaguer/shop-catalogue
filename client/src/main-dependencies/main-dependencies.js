@@ -7,7 +7,8 @@ const auth = require('@websanova/vue-auth')
 const bearer = require('@websanova/vue-auth/drivers/auth/bearer.js')
 const httpAxios = require('@websanova/vue-auth/drivers/http/axios.1.x.js')
 const vueRouter = require('@websanova/vue-auth/drivers/router/vue-router.2.x.js')
-const caLocale = require('@/locales/en.json')
+const caLocale = require('@/locales/ca.json')
+const enLocale = require('@/locales/en.json')
 const svgLoading = require('@/assets/loading.svg')
 
 function initGoogleMaps(Vue) {
@@ -35,11 +36,12 @@ function initLocalization(Vue) {
   Vue.use(VueI18n)
 
   const messages = {
-    en: caLocale,
+    en: enLocale,
+    'ca-ES': caLocale
   }
 
   return new VueI18n({
-    locale: 'en',
+    locale: navigator.language,
     fallbackLocale: 'en',
     messages,
   })
