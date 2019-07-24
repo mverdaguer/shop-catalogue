@@ -95,7 +95,7 @@ app.route('/api/suppliers/:id')
   .patch(cors(), async (req, res) => {
     res.json({});
   })
-  .post(cors(), async (req, res) => {
+  .delete(cors(), async (req, res) => {
     res.json({});
   });
 
