@@ -74,8 +74,7 @@ app.route('/api/suppliers')
   });
 
 app.get('/api/suppliers/:id/edit', cors(), async (req, res) => {
-  const supplier = suppliers.find(sup => sup.id === req.params.id) || {};
-  res.json(supplier);
+  const supplier = suppliers.find(sup => sup.id === req.params.id) || {id: req.params};
 });
 
 
