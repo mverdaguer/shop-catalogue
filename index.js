@@ -53,14 +53,14 @@ app.get('/api/items', cors(), async (req, res) => {
   res.json(items);
 });
 
+const suppliers = [
+  {id: 1, name: "supplier 1" },
+  {id: 2, name: "supplier 2" },
+  {id: 3, name: "supplier 3" },
+];
+
 app.route('/api/suppliers')
   .get(cors(), async (req, res) => {
-    const suppliers = [
-      {id: 1, name: "supplier 1" },
-      {id: 2, name: "supplier 2" },
-      {id: 3, name: "supplier 3" },
-    ];
-  
     res.json(suppliers);
   })
   .delete(cors(), async (req, res) => {
@@ -72,6 +72,12 @@ app.route('/api/suppliers')
   .put(cors(), async (req, res) => {
     res.json({});
   });
+
+app.get('/api/suppliers/:id/edit', cors(), async (req, res) => {
+  const supplier = suppliers.find(sup => sup.id === req.params.id) || {};
+  res.json(supplier);
+});
+
 
 /*app.get('/api/suppliers', cors(), async (req, res) => {
   const suppliers = [
@@ -87,10 +93,9 @@ app.post('/api/send', cors(), async (req, res) => {
   res.json({});
 });
 
-
 // Anything that doesn't match the above, send back the index.html file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/dist'))
+  res.sendFile(path.join(__dirname + '/client/dist/index.html'))
 })
 
 // Choose the port and start the server
