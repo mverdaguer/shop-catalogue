@@ -45,6 +45,7 @@ export default {
 
   created() {
     this.$store.dispatch('fetchCategories')
+    document.title =  this.$t('main.brand_name')
   },
 
   methods: {
