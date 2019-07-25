@@ -40,8 +40,13 @@ function initLocalization(Vue) {
     'ca-ES': caLocale,
   }
 
+  let locale = navigator.language;
+  if (process.env.NODE_ENV === 'test') {
+    locale = 'en';
+  }
+
   return new VueI18n({
-    locale: navigator.language,
+    locale,
     fallbackLocale: 'en',
     messages,
   })

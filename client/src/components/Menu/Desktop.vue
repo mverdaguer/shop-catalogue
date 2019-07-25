@@ -50,7 +50,18 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     isAdminPage() {
-      const urls = ['DisplayItem', 'DisplayCategory', 'EditItem', 'EditCategory', 'CreateItem', 'CreateCategory']
+      const urls = [
+        'DisplayItem',
+        'DisplayCategory',
+        'DisplaySupplier',
+        'EditItem',
+        'EditCategory',
+        'EditSupplier',
+        'CreateItem',
+        'CreateCategory',
+        'CreateSupplier',
+        'HomeImages',
+      ]
       return urls.indexOf(this.$route.name) >= 0
     },
 
