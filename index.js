@@ -4,6 +4,8 @@ const path = require('path');
 
 // Create the server
 const app = express();
+app.use(cors());
+app.options('*', cors());
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'client/dist')));
