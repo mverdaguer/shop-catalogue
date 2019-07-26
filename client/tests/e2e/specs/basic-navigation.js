@@ -16,7 +16,7 @@ describe('Main route navigation and dynamic menu', () => {
 
   const checkTitle = (cssSelector, title) => {
     cy.get(`${cssSelector} h1`)
-        .contains(title);
+      .contains(title);
   };
 
   const createItCase = itCase => {
