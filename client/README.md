@@ -1,4 +1,4 @@
-# shop-frontend
+# shop-catalogue
 
 ## Project setup
 ```
@@ -30,6 +30,12 @@ npm run lint
 npm run test:e2e
 ```
 
+A server running is needed, from the parent folder run:
+```
+npm run start
+```
+
+
 ### Run your unit tests
 ```
 npm run test:unit
@@ -48,9 +54,7 @@ Here you must define a set of configuration variables.
 6. _VUE_APP_MAP_LONGITUDE_: Longitude coordinade of Contact map.
 7. _VUE_APP_GOOGLE_MAPS_KEY_: Your Google Maps key.
 
-There already are 2 key sets (regarding the URLs) set up, which might help you out:
-1. To run against a local php artisan serve (Backend developed in Laravel). _.env.localdev_
-2. To run unit tests. _.env.test_
+There is already a key set used for e2e tests set up, which might help you out: _.env.test_.
 
 ### MainPage
 Besides all the texts that are set up in the locales/ files, in this page there is a carousel with images which are obtained by calling _VUE_APP_API_BASE_URL/home_images_.
