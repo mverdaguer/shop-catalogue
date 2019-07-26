@@ -73,7 +73,7 @@ describe('Admin supliers page', () => {
       .contains('Providers');
   });
 
-  it('remove Supplier', () => {
+  it('Remove Supplier', () => {
     cy.visit('/admin_suppliers');
 
     cy.get('div.el-dialog__wrapper')
