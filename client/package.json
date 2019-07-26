@@ -28,6 +28,7 @@
     "babel-jest": "^23.6.0",
     "bootstrap-sass": "^3.4.1",
     "core-js": "^2.6.5",
+    "cypress-file-upload": "^3.3.2",
     "dotenv": "^8.0.0",
     "element-ui": "^2.10.1",
     "eslint": "^6.0.1",
