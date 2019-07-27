@@ -47,7 +47,7 @@ Here you can manage the images displayed on the MainPage carousel.
 ## .env
 Environment variables:
 1. _VUE_APP_API_BASE_URL_: The backend base url.
-2. _VUE_APP_API_BASE_URL_IMAGES_: The url where the images retrived from the backend are (in the mocked server is the same _VUE_APP_API_BASE_URL_).
+2. _VUE_APP_API_BASE_URL_IMAGES_: The url where are the images retrived from the backend (in the mocked server is the same _VUE_APP_API_BASE_URL_).
 3. _VUE_APP_API_BASE_AXIOS_URL_: Base url for all the backend requests using axios.
 4. _VUE_APP_API_ANALYTICS_: Your google analytics key.
 5. _VUE_APP_MAP_LATITUDE_: Latitude coordinade of Contact map.
@@ -151,7 +151,7 @@ _PATCH_ to _VUE_APP_API_BASE_URL/items/{id-item}_. The request params must inclu
   },
   id: int-number,
   image: image in base64 format,
-  name: "item name"
+  name: "item name",
   supplier: int-number (Optional parameter)
 }
 ````
@@ -183,6 +183,19 @@ _PATCH_ to _VUE_APP_API_BASE_URL/categories/{id-category}_. The request params m
 _DELETE_ to _VUE_APP_API_BASE_URL/categories/{id-category}_. 
 
 ## Suppliers
+### Load
+The suppliers are obtained from _VUE_APP_API_BASE_URL/suppliers_
+
+These suppliers must be returned in a list like:
+````
+[
+  {
+    id: int-number, 
+    name: "supplier name"
+  }
+]
+````
+
 ### Creation
 _POST_ to _VUE_APP_API_BASE_URL/suppliers_. The request params must include the created supplier like:
 ````
@@ -205,7 +218,7 @@ _DELETE_ to _VUE_APP_API_BASE_URL/suppliers/{id-supplier}_.
 
 ## Home images
 ### Creation
-_POST_ to _VUE_APP_API_BASE_URL/home_images_. The request params must include the created home_image like:
+_POST_ to _VUE_APP_API_BASE_URL/home_images_. The request params must include the created home image like:
 ````
 {
   path: image in base64 format
