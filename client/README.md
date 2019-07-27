@@ -10,16 +10,16 @@ The main goal of this app is to display a catalogue of images for the products o
 A description of the shop and a carousel of images.
 
 ## Contact
-A form to send a message (mail) to the shop manager and some information regarding the shop:
+A form to send a message (email) to the shop manager and some information regarding the shop:
 
 - GMaps position.
-- Adress.
+- Address.
 - Phone number.
 - Contact email.
 - Timetable.
 
 ## ItemsList
-Here you will see a list of categorized items (products) of the shop. Both the items and their categories can be managed from the admin zone.
+A list of categorized items (products) of the shop. Both the items and their categories can be managed from the admin zone.
 
 ## Register
 To register a new user.
@@ -45,7 +45,7 @@ Here you can manage the images displayed on the MainPage carousel.
 # Configuration
 
 ## .env
-Here you must define a set of environment variables.
+Environment variables:
 1. _VUE_APP_API_BASE_URL_: The backend base url.
 2. _VUE_APP_API_BASE_URL_IMAGES_: The url where the images retrived from the backend are (in the mocked server is the same _VUE_APP_API_BASE_URL_).
 3. _VUE_APP_API_BASE_AXIOS_URL_: Base url for all the backend requests using axios.
@@ -65,11 +65,11 @@ In this page there is a carousel with images which are obtained by calling _VUE_
 
 These images must be returned like:
 
-<code>
+````
 { 
   data: ['img1.png', 'img2.png']
 }
-</code>
+````
 
 All of them must be contained in _VUE_APP_API_BASE_URL/images/home/image-name_.
 
@@ -77,16 +77,14 @@ All of them must be contained in _VUE_APP_API_BASE_URL/images/home/image-name_.
 Notice that the contact page has a form to send a message to the web owner.
 
 This will send a JSON message (POST) with fields:
-<code>
-
+````
 {
   name: 'name',
   mail: 'aa@gmail.com',
   content: 'content',
   phone: '1234'
 }
-
-</code>
+````
 
 All of which are required but the _phone_.
 This message will be sent via a _POST_ call to _VUE_APP_API_BASE_URL/send_.
@@ -97,20 +95,36 @@ Here you can see all the items of the shop filtered by their category.
 The categories are obtained from _VUE_APP_API_BASE_URL/categories_
 
 These categories must be returned in a list like:
-<code>
-
-[{id: int-number, name: "category name", parent_category: int-number or undefined}]
-
-</code>
+````
+[
+  {
+    id: int-number, 
+    name: "category name", 
+    parent_category: int-number or undefined
+  }
+]
+````
 
 The items are obtained from _VUE_APP_API_BASE_URL/items_
 
 These items must be returned in a list like:
-<code>
-
-[{id: int-number, name: "item name", image: ".jpg" aka image extension, category: {id: int-number, name: "category name"}, supplier: {id: int-number, name: "supplier name"}}]
-
-</code>
+````
+[
+  {
+    id: int-number, 
+    name: "item name", 
+    image: ".jpg" aka image extension, 
+    category: {
+      id: int-number, 
+      name: "category name"
+    }, 
+    supplier: {
+      id: int-number, 
+      name: "supplier name"
+    }
+  }
+]
+````
 
 If the item has no category or supplier the field must be an empty object ```{}```.
 
@@ -118,32 +132,29 @@ If the item has no category or supplier the field must be an empty object ```{}`
 ### Items
 #### Creation
 _POST_ to _VUE_APP_API_BASE_URL/items_. The request params must include the created item like:
-
-<code>
-
+````
 {
   category: int-number,
   image: image in base64 format,
   name: "item name",
   supplier: int-number (Optional parameter)
-}
-
-</code>
+} 
+````
 
 #### Edition
 _PATCH_ to _VUE_APP_API_BASE_URL/items/{id-item}_. The request params must include the created item like:
-
-<code>
-
+````
 {
-  category: {id: int-number, name: "category name"},
+  category: {
+    id: int-number, 
+    name: "category name"
+  },
   id: int-number,
   image: image in base64 format,
   name: "item name"
   supplier: int-number (Optional parameter)
 }
-
-</code>
+````
 
 #### Removal
 _DELETE_ to _VUE_APP_API_BASE_URL/items/{id-item}_. 
@@ -151,28 +162,22 @@ _DELETE_ to _VUE_APP_API_BASE_URL/items/{id-item}_.
 ### Categories
 #### Creation
 _POST_ to _VUE_APP_API_BASE_URL/categories_. The request params must include the created category like:
-
-<code>
-
+````
 {
   name: "category name",
   parent_category: int-number (Optional parameter)
 }
-
-</code>
+````
 
 #### Edition
 _PATCH_ to _VUE_APP_API_BASE_URL/categories/{id-category}_. The request params must include the created category like:
-
-<code>
-
+````
 {
   id: int-number,
   name: "category name",
   parent_category: int-number (Optional parameter)
 }
-
-</code>
+````
 
 ### Removal
 _DELETE_ to _VUE_APP_API_BASE_URL/categories/{id-category}_. 
@@ -180,26 +185,20 @@ _DELETE_ to _VUE_APP_API_BASE_URL/categories/{id-category}_.
 ## Suppliers
 ### Creation
 _POST_ to _VUE_APP_API_BASE_URL/suppliers_. The request params must include the created supplier like:
-
-<code>
-
+````
 {
   name: "supplier name"
 }
-
-</code>
+````
 
 ### Edition
 _PATCH_ to _VUE_APP_API_BASE_URL/suppliers/{id-supplier}_. The request params must include the created supplier like:
-
-<code>
-
+````
 {
   id: int-number,
   name: "supplier name"
 }
-
-</code>
+````
 
 ### Removal
 _DELETE_ to _VUE_APP_API_BASE_URL/suppliers/{id-supplier}_. 
@@ -207,14 +206,11 @@ _DELETE_ to _VUE_APP_API_BASE_URL/suppliers/{id-supplier}_.
 ## Home images
 ### Creation
 _POST_ to _VUE_APP_API_BASE_URL/home_images_. The request params must include the created home_image like:
-
-<code>
-
+````
 {
   path: image in base64 format
 }
-
-</code>
+````
 
 ### Removal
 _DELETE_ to _VUE_APP_API_BASE_URL/home_images/{image name}_.
