@@ -24,13 +24,14 @@ initRouter(Vue)
 initGoogleMaps(Vue)
 initLazyLoad(Vue)
 
-// eslint-disable-next-line
-if (false) {
+if (!process.env.VUE_APP_TEST_ENVIRONMENT) {
   initAuthentification(Vue, axios)
+} else {
+  Vue.prototype.$auth = {
+    check: () => true,
+  }
 }
-Vue.prototype.$auth = {
-  check: () => true,
-}
+
 
 const i18n = initLocalization(Vue)
 initAnalytics(Vue)
